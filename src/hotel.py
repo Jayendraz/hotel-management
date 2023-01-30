@@ -1,3 +1,27 @@
+from src.room import Room
+from src.status import Status
+
+
+class Hotel:
+    Floors = 4
+
+    def __init__(self):
+        rooms = []
+        for floor in range(1, Hotel.Floors + 1):
+            if floor % 2 != 0:
+                for letter in "ABCDE":
+                    room_number = f"{floor}{letter}"
+                    rooms.append(Room(room_number, Status.Available))
+            else:
+                for letter in "EDCBA":
+                    room_number = f"{floor}{letter}"
+                    rooms.append(Room(room_number, Status.Available))
+        self.rooms = rooms
+
+    def get_all_rooms(self):
+        return self.rooms
+
+
 """
     room1A = Room("1A", Status.Available)
     room1B = Room("1B", Status.Available)
