@@ -27,3 +27,11 @@ class Room:
 
     def out_of_service(self):
         self.set_status(Status.Repair)
+
+    def is_available(self):
+        if self.status == Status.Available:
+            return True
+
+    def is_occupied(self):
+        if self.status == Status.Occupied:
+            return True

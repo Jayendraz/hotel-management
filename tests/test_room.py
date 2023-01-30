@@ -32,7 +32,7 @@ class TestRoomFunctions(unittest.TestCase):
         # Assert
         self.assertEqual(room.status, expected_status)
 
-    def test_checkout(self):
+    def test_room_should_be_marked_as_vacant_after_checkout(self):
         # Arrange
         room = Room("1A", Status.Occupied)
         expected_status = Status.Vacant
@@ -41,7 +41,7 @@ class TestRoomFunctions(unittest.TestCase):
         # Assert
         self.assertEqual(room.status, expected_status)
 
-    def test_clean(self):
+    def test_room_should_be_marked_as_available_after_clean(self):
         # Arrange
         room = Room("1A", Status.Vacant)
         expected_status = Status.Available
@@ -50,7 +50,7 @@ class TestRoomFunctions(unittest.TestCase):
         # Assert
         self.assertEqual(room.status, expected_status)
 
-    def test_room_marked_out_of_service(self):
+    def test_room_should_be_marked_as_repair_after_callled_as_out_of_service(self):
         # Arrange
         room = Room("1A", Status.Vacant)
         expected_status = Status.Repair
@@ -59,7 +59,7 @@ class TestRoomFunctions(unittest.TestCase):
         # Assert
         self.assertEqual(room.status, expected_status)
 
-    def test_room_repaired(self):
+    def test_room_should_be_marked_as_vacant_after_repair(self):
         # Arrange
         room = Room("1A", Status.Repair)
         expected_status = Status.Vacant
