@@ -36,7 +36,7 @@ class Hotel:
                 break
         return available_room
 
-    def _check_into_room(self):
+    def _check_in_room(self):
         room = self._get_first_nearest_available_room()
         if not room:
             raise Exception("Sorry! Hotel is full")
@@ -46,7 +46,7 @@ class Hotel:
 
     def assign_room(self):
         try:
-            room_number = self._check_into_room()
+            room_number = self._check_in_room()
             return room_number
         except Exception as exp:
             return str(exp)
@@ -70,7 +70,7 @@ class Hotel:
                 break
         return result
 
-    def _validate_room(self, room_number):
+    def _validate_room_number(self, room_number):
         room = self._find_room(room_number)
         if room is None:
             raise ValueError("Error!! Please input valid room number")
@@ -79,29 +79,40 @@ class Hotel:
 
     def check_out_room(self, room_number):
         try:
-            room = self._validate_room(room_number)
+            room = self._validate_room_number(room_number)
             room.check_out()
+            return "success"
         except ValueError as err:
             return str(err)
+        except Exception as exp:
+            return str(exp)
 
     def clean_room(self, room_number):
         try:
-            room = self._validate_room(room_number)
+            room = self._validate_room_number(room_number)
             room.cleaned()
+            return "success"
         except ValueError as err:
             return str(err)
+        except Exception as exp:
+            return str(exp)
 
     def mark_room_out_of_service(self, room_number):
-        room = self._validate_room(room_number)
-        if not (room.is_available() or room.is_occupied()):
+        try:
+            room = self._validate_room_number(room_number)
             room.out_of_service()
-            print(room.status)
-        else:
-            return "Error! Available/Occupied room can not be marked as out of service"
+            return "success"
+        except ValueError as err:
+            return str(err)
+        except Exception as exp:
+            return str(exp)
 
     def repair_room(self, room_number):
         try:
-            room = self._validate_room(room_number)
+            room = self._validate_room_number(room_number)
             room.repaired()
+            return "success"
         except ValueError as err:
             return str(err)
+        except Exception as exp:
+            return exp

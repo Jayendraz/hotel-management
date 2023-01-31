@@ -17,16 +17,28 @@ class Room:
         self._set_status(Status.Occupied)
 
     def check_out(self):
-        self._set_status(Status.Vacant)
+        if self.is_occupied():
+            self._set_status(Status.Vacant)
+        else:
+            raise Exception("Error!! room is not Occupied")
 
     def cleaned(self):
-        self._set_status(Status.Available)
+        if self.is_vacant():
+            self._set_status(Status.Available)
+        else:
+            raise Exception("Error!! room is not Vacant")
 
     def repaired(self):
-        self._set_status(Status.Vacant)
+        if self.is_out_of_service():
+            self._set_status(Status.Vacant)
+        else:
+            raise Exception("Error!! room can not be repair")
 
     def out_of_service(self):
-        self._set_status(Status.Repair)
+        if self.is_available() or self.is_occupied():
+            raise Exception("Error!! room can not be repaired")
+        else:
+            self._set_status(Status.Repair)
 
     def is_available(self):
         if self.status == Status.Available:
@@ -34,4 +46,12 @@ class Room:
 
     def is_occupied(self):
         if self.status == Status.Occupied:
+            return True
+
+    def is_vacant(self):
+        if self.status == Status.Vacant:
+            return True
+
+    def is_out_of_service(self):
+        if self.status == Status.Repair:
             return True

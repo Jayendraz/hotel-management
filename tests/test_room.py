@@ -67,3 +67,39 @@ class TestRoomFunctions(unittest.TestCase):
         room.repaired()
         # Assert
         self.assertEqual(expected_status, room.status)
+
+    def test_room_is_available_should_be_true_for_available_room(self):
+        # Arrange
+        room = Room("1A", Status.Available)
+        expected_response = True
+        # Action
+        actual_response = room.is_available()
+        # Assert
+        self.assertEqual(expected_response, actual_response)
+
+    def test_room_is_vacant_should_be_true_for_vacant_room(self):
+        # Arrange
+        room = Room("1A", Status.Vacant)
+        expected_response = True
+        # Action
+        actual_response = room.is_vacant()
+        # Assert
+        self.assertEqual(expected_response, actual_response)
+
+    def test_room_is_occupied_should_be_true_for_occupied_room(self):
+        # Arrange
+        room = Room("1A", Status.Occupied)
+        expected_response = True
+        # Action
+        actual_response = room.is_occupied()
+        # Assert
+        self.assertEqual(expected_response, actual_response)
+
+    def test_room_is_out_of_service_should_be_true_for_out_of_service_room(self):
+        # Arrange
+        room = Room("1A", Status.Repair)
+        expected_response = True
+        # Action
+        actual_response = room.is_out_of_service()
+        # Assert
+        self.assertEqual(expected_response, actual_response)
