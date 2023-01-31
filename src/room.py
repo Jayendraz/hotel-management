@@ -10,23 +10,23 @@ class Room:
     def get_status(self):
         return self.status
 
-    def set_status(self, status):
+    def _set_status(self, status):
         self.status = status
 
     def check_in(self):
-        self.set_status(Status.Occupied)
+        self._set_status(Status.Occupied)
 
     def check_out(self):
-        self.set_status(Status.Vacant)
+        self._set_status(Status.Vacant)
 
     def cleaned(self):
-        self.set_status(Status.Available)
+        self._set_status(Status.Available)
 
     def repaired(self):
-        self.set_status(Status.Vacant)
+        self._set_status(Status.Vacant)
 
     def out_of_service(self):
-        self.set_status(Status.Repair)
+        self._set_status(Status.Repair)
 
     def is_available(self):
         if self.status == Status.Available:
