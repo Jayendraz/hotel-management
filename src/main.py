@@ -14,7 +14,6 @@ def main():
             print(room_number, "has assign to you.")
         elif user_input == 2:
             rm_num = room_number_input()
-            # case: non checked in room should throw error
             hotel.check_out_room(rm_num)
         elif user_input == 3:
             rm_num = room_number_input()
