@@ -1,11 +1,13 @@
 from src.room import Room
 from src.status import Status
+from src.housekeeper import HouseKeeper
 
 
 class Hotel:
     Floors = 4
 
     def __init__(self):
+        self.housekeeper = None
         rooms = []
         for floor in range(1, Hotel.Floors + 1):
             if floor % 2 != 0:
@@ -17,6 +19,12 @@ class Hotel:
                     room_number = f"{floor}{letter}"
                     rooms.append(Room(room_number, Status.Available))
         self.rooms = rooms
+
+    def set_housekeeper(self, housekeeper):
+        self.housekeeper = housekeeper
+
+    def get_housekeeper(self):
+        return self.housekeeper
 
     def get_all_rooms(self):
         return self.rooms

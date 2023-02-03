@@ -14,7 +14,10 @@ class Room:
         self.status = status
 
     def check_in(self):
-        self._set_status(Status.Occupied)
+        if self.is_available():
+            self._set_status(Status.Occupied)
+        else:
+            raise Exception("Error!! room in not available")
 
     def check_out(self):
         if self.is_occupied():
@@ -36,7 +39,7 @@ class Room:
 
     def out_of_service(self):
         if self.is_available() or self.is_occupied():
-            raise Exception("Error!! room can not be repaired")
+            raise Exception("Error!! room can not be out of service")
         else:
             self._set_status(Status.Repair)
 

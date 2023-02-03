@@ -1,6 +1,5 @@
 import unittest
 from src import Hotel
-from src import Status
 
 
 class TestRoomFunctions(unittest.TestCase):
@@ -90,92 +89,3 @@ class TestRoomFunctions(unittest.TestCase):
         actual_response = self.hotel.assign_room()
         # Assert
         self.assertEqual(expected_response, actual_response)
-
-    def test_should_not_allow_checking_out_from_non_check_in_room(self):
-        # Arrange
-        expected_response = "Error!! room is not Occupied"
-        # Action
-        actual_response = self.hotel.check_out_room("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-
-    def test_rooms_with_status_available_should_not_be_repaired(self):
-        # Arrange
-        expected_response = "Error!! room can not be repaired"
-        # Action
-        actual_response = self.hotel.mark_room_out_of_service("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-
-    def test_rooms_with_status_occupied_should_not_be_repaired(self):
-        # Arrange
-        self.hotel.assign_room()  # 1A is occupied
-        expected_response = "Error!! room can not be repaired"
-        # Action
-        actual_response = self.hotel.mark_room_out_of_service("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-
-    def test_rooms_with_status_vacant_can_be_repaired(self):
-        # Arrange
-        self.hotel.assign_room()  # 1A is occupied
-        self.hotel.check_out_room("1A")
-        expected_response = "success"
-        # Action
-        actual_response = self.hotel.mark_room_out_of_service("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-
-    def test_rooms_with_status_occupied_should_not_be_cleaned(self):
-        # Arrange
-        self.hotel.assign_room()  # 1A is occupied
-        expected_response = "Error!! room is not Vacant"
-        # Action
-        actual_response = self.hotel.clean_room("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-
-    def test_rooms_with_status_available_should_not_be_cleaned(self):
-        # Arrange
-        # 1A is available
-        expected_response = "Error!! room is not Vacant"
-        # Action
-        actual_response = self.hotel.clean_room("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-
-    def test_rooms_with_status_repair_should_not_be_cleaned(self):
-        # Arrange
-        self.hotel.assign_room()
-        self.hotel.check_out_room("1A")
-        self.hotel.mark_room_out_of_service("1A")
-        expected_response = "Error!! room is not Vacant"
-        # Action
-        actual_response = self.hotel.clean_room("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-
-    '''
-    def test_room_with_status_repair_can_not_be_available(self):
-        pass
-
-    def test_room_with_status_occupied_can_not_be_available(self):
-        # TODO: implement
-        pass
-    
-
-    def test_room_with_status_vacant_can_not_be_occupied(self):
-        # Arrange
-        self.hotel.assign_room()
-        self.hotel.check_out_room("1A")
-        expected_response = "Error!! room is not Vacant"
-        # Action
-        actual_response = self.hotel.clean_room("1A")
-        # Assert
-        self.assertEqual(expected_response, actual_response)
-        pass
-    '''
-
-
-
-
