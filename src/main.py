@@ -1,8 +1,10 @@
 from hotel import Hotel
+from housekeeper import HouseKeeper
 
 
 def main():
     hotel = Hotel()
+    hotel.set_housekeeper(HouseKeeper("John", hotel))
     app_running = True
     while app_running:
         banner()
@@ -14,13 +16,15 @@ def main():
             print(room_number, "has assign to you.")
         elif user_input == 2:
             rm_num = room_number_input()
+
             hotel.check_out_room(rm_num)
         elif user_input == 3:
             rm_num = room_number_input()
-            hotel.clean_room(rm_num)
+            hotel.housekeeper.clean_room(rm_num)
+            #hotel.clean_room(rm_num)
         elif user_input == 4:
             rm_num = room_number_input()
-            hotel.mark_room_out_of_service(rm_num)
+            mark_room_out_of_service(rm_num)
         elif user_input == 5:
             rm_num = room_number_input()
             hotel.repair_room(rm_num)
