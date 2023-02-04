@@ -32,9 +32,7 @@ class HouseKeeperController(PersonController):
             self.process()
 
         elif option == "5":
-            pass
-            #controllers = ServiceController()
-            #controllers.process()
+            return
 
     def _find_housekeeper(self, ):
         pass

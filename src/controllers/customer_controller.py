@@ -8,6 +8,9 @@ from src.customer import Customer
 
 class CustomerController(PersonController):
 
+    def __init__(self, service_control):
+        self.service_control = service_control
+
     def process(self):
         print("------------------Customer----------------------")
         super().view_menu()
@@ -35,9 +38,8 @@ class CustomerController(PersonController):
             self.display_all()
             self.process()
 
-        '''elif option == 5:
-            controllers = ServiceController()
-            controllers.process()'''
+        elif option == 5:
+            return
 
     def _find_customer(self, ):
         pass

@@ -8,7 +8,6 @@ class ServiceController(Controller):
     def process(self):
         self.view_menu()
         option = self.read_input()
-        print("OPtion is ", option)
         self.serve_section(option)
 
     def view_menu(self):
@@ -26,16 +25,19 @@ class ServiceController(Controller):
     def serve_section(self, option):
         if option == "1":
             print("selected ontion 1")
-            controller = CustomerController()
+            controller = CustomerController(self)
             controller.process()
+            self.process()
 
         elif option == "2":
             controller = HouseKeeperController()
             controller.process()
+            self.process()
 
         elif option == "3":
             controller = HotelController()
             controller.process()
+            self.process()
 
         elif option == "4":
             exit()
