@@ -1,12 +1,10 @@
-from src.controllers.controller import Controller
 import uuid
 
-from src.controllers.person_controller import PersonController
-#from src.controllers.service_controller import ServiceController
+from src.controls.person_control import PersonControl
 from src.housekeeper import HouseKeeper
 
 
-class HouseKeeperController(PersonController):
+class HouseKeeperControl(PersonControl):
 
     def process(self):
         print("----------------Housekeeper--------------------")

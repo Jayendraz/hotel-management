@@ -1,12 +1,10 @@
-from src.controllers.controller import Controller
 import uuid
 
-from src.controllers.person_controller import PersonController
-#from src.controllers.service_controller import ServiceController
+from src.controls.person_control import PersonControl
 from src.customer import Customer
 
 
-class CustomerController(PersonController):
+class CustomerControl(PersonControl):
 
     def __init__(self, service_control):
         self.service_control = service_control
@@ -23,15 +21,15 @@ class CustomerController(PersonController):
 
     def serve_section(self, option):
         if option == "1":
-            self.register_new_housekeeper()
+            self.register_new_customer()
             self.process()
 
         elif option == "2":
-            self.update_housekeeper()
+            self.update_customer()
             self.process()
 
         elif option == "3":
-            self.delete_housekeeper()
+            self.delete_customer()
             self.process()
 
         elif option == "4":
@@ -44,7 +42,7 @@ class CustomerController(PersonController):
     def _find_customer(self, ):
         pass
 
-    def register_new_housekeeper(self):
+    def register_new_customer(self):
         print("Enter Customer name: ")
         name = input()
         print("Enter Customer contact No: ")
@@ -56,10 +54,10 @@ class CustomerController(PersonController):
         else:
             print("Error")
 
-    def update_housekeeper(self, name, contact_no):
+    def update_customer(self):
         print("Customer has been updated")
 
-    def delete_housekeeper(self, name):
+    def delete_customer(self):
         print("Customer has been deleted")
 
     def display_all(self):

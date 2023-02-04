@@ -1,8 +1,8 @@
 from src import Status
-from src.controllers.controller import Controller
+from src.controls.control import Control
 
 
-class RoomController(Controller):
+class RoomControl(Control):
 
     def process(self):
         pass

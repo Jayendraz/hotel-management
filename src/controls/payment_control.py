@@ -1,8 +1,8 @@
-from src.controllers.controller import Controller
+from src.controls.control import Control
 from src.payment import Payment
 
 
-class PaymentControl(Controller):
+class PaymentControl(Control):
 
     def __init__(self):
         self.payment = Payment()

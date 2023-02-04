@@ -1,6 +1,6 @@
 # interface
 
-class Controller:
+class Control:
     def process(self):
         pass
 

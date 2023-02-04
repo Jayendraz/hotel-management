@@ -1,10 +1,10 @@
-from src.controllers.customer_controller import CustomerController
-from src.controllers.controller import Controller
-from .hotel_controller import HotelController
-from .housekeeper_controller import HouseKeeperController
+from src.controls.customer_control import CustomerControl
+from src.controls.control import Control
+from src.controls.hotel_control import HotelControl
+from src.controls.housekeeper_control import HouseKeeperControl
 
 
-class ServiceController(Controller):
+class ServiceControl(Control):
     def process(self):
         self.view_menu()
         option = self.read_input()
@@ -25,17 +25,17 @@ class ServiceController(Controller):
     def serve_section(self, option):
         if option == "1":
             print("selected ontion 1")
-            controller = CustomerController(self)
+            controller = CustomerControl(self)
             controller.process()
             self.process()
 
         elif option == "2":
-            controller = HouseKeeperController()
+            controller = HouseKeeperControl()
             controller.process()
             self.process()
 
         elif option == "3":
-            controller = HotelController()
+            controller = HotelControl()
             controller.process()
             self.process()
 

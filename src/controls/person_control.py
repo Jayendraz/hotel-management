@@ -1,9 +1,7 @@
-from src.controllers.controller import Controller
-
-#from src.controllers.service_controller import ServiceController
+from src.controls.control import Control
 
 
-class PersonController(Controller):
+class PersonControl(Control):
 
     def process(self):
         self.view_menu()

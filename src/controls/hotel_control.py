@@ -1,14 +1,13 @@
 from src import Hotel
-from src.controllers.controller import Controller
-from src.controllers.payment_control import PaymentControl
-from src.controllers.room_controller import RoomController
-#from src.controllers.service_controller import ServiceController
+from src.controls.control import Control
+from src.controls.payment_control import PaymentControl
+from src.controls.room_control import RoomControl
 
 
-class HotelController(Controller):
+class HotelControl(Control):
     def __init__(self):
         self.hotel = Hotel()
-        self.room_controller = RoomController()
+        self.room_controller = RoomControl()
         self.payment_control = PaymentControl()
 
     def process(self):
