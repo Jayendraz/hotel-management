@@ -1,59 +1,39 @@
 from src.hotel import Hotel
+from src.person import Person
 
 
-class HouseKeeper:
+class HouseKeeper(Person):
 
-    def __init__(self, name, hotel: Hotel):
-        self.name = name
-        self.hotel = hotel
+    def __init__(self, h_id, name, contact_no, id):
+        super().__init__(id, name, contact_no)
+        self._salary = None
 
-    def _find_room(self, room_number):
-        rooms = self.hotel.rooms
-        result = None
-        for room in rooms:
-            if room.room_number == room_number:
-                result = room
-                break
-        return result
+    def update_id(self, h_id):
+        super().update_id(h_id)
 
-    def validate_room_number(self, room_number):
-        room = self._find_room(room_number)
-        if room is None:
-            raise ValueError("Error!! Please input valid room number")
-        else:
-            return room
+    def get_id(self):
+        return self._h_id
 
-    def clean_room(self, room_number):
-        print("cleaning room")
-        try:
-            room = self.validate_room_number(room_number)
-            room.cleaned()
-            print("after room clean up")
-            print(room.status)
-            return "success"
-        except ValueError as err:
-            print("error 1")
-            return str(err)
-        except Exception as exp:
-            print("error 2")
-            return str(exp)
+    def set_name(self, name):
+        self._name = name
 
-    def mark_room_out_of_service(self, room_number):
-        try:
-            room = self.validate_room_number(room_number)
-            room.out_of_service()
-            return "success"
-        except ValueError as err:
-            return str(err)
-        except Exception as exp:
-            return str(exp)
+    def get_name(self):
+        return self._name
 
-    def repair_room(self, room_number):
-        try:
-            room = self.validate_room_number(room_number)
-            room.repaired()
-            return "success"
-        except ValueError as err:
-            return str(err)
-        except Exception as exp:
-            return exp
+    def set_salary(self, salary):
+        if str(salary).isdigit() and self._salary > 0:
+            self._salary = salary
+
+    def get_salary(self):
+        return self._salary
+
+    def set_contact_no(self, contact_no):
+        if str(contact_no).isdigit():
+            self._contact_no = contact_no
+
+    def get_contact_no(self):
+        return self._contact_no
+
+
+
+

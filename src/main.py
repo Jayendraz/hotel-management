@@ -1,11 +1,17 @@
 from hotel import Hotel
 from housekeeper import HouseKeeper
+from controllers.service_controller import ServiceController
 
 
 def main():
-    hotel = Hotel()
-    hotel.set_housekeeper(HouseKeeper("John", hotel))
-    app_running = True
+    '''hotel = Hotel()
+    housekeeper1 = HouseKeeper("ABC", "12345")
+
+    hotel.set_housekeeper(housekeeper1)'''
+    service_controller = ServiceController()
+    service_controller.process()
+
+    '''app_running = True
     while app_running:
         banner()
         print("Enter option: ")
@@ -29,7 +35,7 @@ def main():
             rm_num = room_number_input()
             hotel.repair_room(rm_num)
         elif user_input == 6:
-            app_running = False
+            app_running = False'''
 
 
 def room_number_input():
