@@ -1,5 +1,6 @@
 from src import Hotel
 from src.controllers.controller import Controller
+from src.controllers.payment_control import PaymentControl
 from src.controllers.room_controller import RoomController
 #from src.controllers.service_controller import ServiceController
 
@@ -8,6 +9,7 @@ class HotelController(Controller):
     def __init__(self):
         self.hotel = Hotel()
         self.room_controller = RoomController()
+        self.payment_control = PaymentControl()
 
     def process(self):
         self.view_menu()
@@ -59,9 +61,7 @@ class HotelController(Controller):
             self.process()
 
         elif option == "6":
-            pass
-            #controller = ServiceController()
-            #controller.process()
+            return
 
     def set_housekeeper(self, housekeeper):
         self.hotel.housekeeper = housekeeper
@@ -94,6 +94,7 @@ class HotelController(Controller):
             raise Exception("Sorry! Hotel is full")
         else:
             self.room_controller.check_in(room)
+            self.payment_control.make_payment()
             return room.room_number
 
     def assign_room(self):
