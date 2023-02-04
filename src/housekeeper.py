@@ -4,8 +4,8 @@ from src.person import Person
 
 class HouseKeeper(Person):
 
-    def __init__(self, h_id, name, contact_no, id):
-        super().__init__(id, name, contact_no)
+    def __init__(self, h_id, name, contact_no):
+        super().__init__(h_id, name, contact_no)
         self._salary = None
 
     def update_id(self, h_id):
@@ -33,7 +33,3 @@ class HouseKeeper(Person):
 
     def get_contact_no(self):
         return self._contact_no
-
-
-
-

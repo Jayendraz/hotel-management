@@ -56,12 +56,9 @@ class CustomerController(PersonController):
 
     def update_housekeeper(self, name, contact_no):
         print("Customer has been updated")
-        pass
 
     def delete_housekeeper(self, name):
         print("Customer has been deleted")
-        pass
 
     def display_all(self):
         print("Display all customer ")
-        pass

@@ -25,8 +25,8 @@ class Hotel:
     def get_housekeeper(self):
         return self.housekeeper
 
-    #def get_all_rooms(self):
-    #    return self.rooms
+    '''def get_all_rooms(self):
+        return self.rooms
 
     def get_all_available_rooms(self):
         available_rooms = []
@@ -58,7 +58,7 @@ class Hotel:
         except Exception as exp:
             return str(exp)
 
-    '''def assign_room(self):
+    def assign_room(self):
         available_rooms = self.get_first_nearest_available_room()
         if not available_rooms:
             return "Error! - No room is available"
@@ -66,9 +66,9 @@ class Hotel:
             # !!!! Write Logic to find nearest entrance room
             room = available_rooms[0]
             room.check_in()
-            return room.room_number'''
+            return room.room_number
 
-    '''def _find_room(self, room_number):
+    def _find_room(self, room_number):
         rooms = self.get_all_rooms()
         result = None
         for room in rooms:
@@ -82,7 +82,7 @@ class Hotel:
         if room is None:
             raise ValueError("Error!! Please input valid room number")
         else:
-            return room'''
+            return room
 
     def check_out_room(self, room_number):
         try:
@@ -94,7 +94,7 @@ class Hotel:
         except Exception as exp:
             return str(exp)
 
-    '''def clean_room(self, room_number):
+    def clean_room(self, room_number):
         try:
             room = self._validate_room_number(room_number)
             room.cleaned()
@@ -122,5 +122,4 @@ class Hotel:
         except ValueError as err:
             return str(err)
         except Exception as exp:
-            return exp
-    '''
+            return exp'''

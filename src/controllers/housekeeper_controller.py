@@ -15,19 +15,23 @@ class HouseKeeperController(PersonController):
         self.serve_section(option)
 
     def serve_section(self, option):
-        if option == 1:
+        if option == "1":
             self.register_new_housekeeper()
+            self.process()
 
-        elif option == 2:
+        elif option == "2":
             self.update_housekeeper()
+            self.process()
 
-        elif option == 3:
+        elif option == "3":
             self.delete_housekeeper()
+            self.process()
 
-        elif option == 4:
+        elif option == "4":
             self.display_all()
+            self.process()
 
-        elif option == 5:
+        elif option == "5":
             pass
             #controllers = ServiceController()
             #controllers.process()
@@ -48,13 +52,10 @@ class HouseKeeperController(PersonController):
             print("Error")
 
     def update_housekeeper(self):
-        print("Customer has been updated")
-        pass
+        print("Housekeeper has been updated")
 
-    def delete_housekeeper(self, name):
+    def delete_housekeeper(self):
         print("Housekeeper has been deleted")
-        pass
 
     def display_all(self):
         print("Displaying all housekeepers")
-        pass

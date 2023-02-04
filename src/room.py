@@ -10,38 +10,8 @@ class Room:
     def get_status(self):
         return self.status
 
-    def _set_status(self, status):
+    def set_status(self, status):
         self.status = status
-
-    def check_in(self):
-        if self.is_available():
-            self._set_status(Status.Occupied)
-        else:
-            raise Exception("Error!! room in not available")
-
-    def check_out(self):
-        if self.is_occupied():
-            self._set_status(Status.Vacant)
-        else:
-            raise Exception("Error!! room is not Occupied")
-
-    def cleaned(self):
-        if self.is_vacant():
-            self._set_status(Status.Available)
-        else:
-            raise Exception("Error!! room is not Vacant")
-
-    def repaired(self):
-        if self.is_out_of_service():
-            self._set_status(Status.Vacant)
-        else:
-            raise Exception("Error!! room can not be repair")
-
-    def out_of_service(self):
-        if self.is_available() or self.is_occupied():
-            raise Exception("Error!! room can not be out of service")
-        else:
-            self._set_status(Status.Repair)
 
     def is_available(self):
         if self.status == Status.Available:
