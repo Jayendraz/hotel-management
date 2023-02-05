@@ -11,16 +11,19 @@ class PaymentControl(Control):
         pass
 
     def make_payment(self):
-        self._do_transaction()
-        invoice = self.payment.get_invoice()
-        return invoice
+        payment_status = self._do_transaction()
+        if payment_status == "success":
+            invoice = self.payment.get_invoice()
+            return invoice
+        else:
+            return None
 
     def _generate_invoice(self):
         self.payment._invoice = "dummy_invoice"
 
     def _do_transaction(self):
         self._generate_invoice()
-        print("payment success")
+        return "success"
 
 
 

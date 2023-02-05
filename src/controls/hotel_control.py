@@ -7,7 +7,7 @@ from src.controls.room_control import RoomControl
 class HotelControl(Control):
     def __init__(self):
         self.hotel = Hotel()
-        self.room_controller = RoomControl()
+        self.room_control = RoomControl()
         self.payment_control = PaymentControl()
 
     def process(self):
@@ -32,31 +32,35 @@ class HotelControl(Control):
     def serve_section(self, option):
         if option == "1":
             room_number = self.assign_room()
-            print(room_number, " has assigned.")
+            print(room_number, " has assigned.") if room_number != None else print("Checkin Failed")
             self.process()
 
         elif option == "2":
             print("Enter room number: ")
             room_number = self.read_input()
-            self.check_out_room(room_number)
+            result = self.check_out_room(room_number)
+            print(result)
             self.process()
 
         elif option == "3":
             print("Enter room number: ")
             room_number = self.read_input()
-            self.clean_room(room_number)
+            result = self.clean_room(room_number)
+            print(result)
             self.process()
 
         elif option == "4":
             print("Enter room number: ")
             room_number = self.read_input()
-            self.mark_room_out_of_service(room_number)
+            result = self.mark_room_out_of_service(room_number)
+            print(result)
             self.process()
 
         elif option == "5":
             print("Enter room number: ")
             room_number = self.read_input()
-            self.repair_room(room_number)
+            result = self.repair_room(room_number)
+            print(result)
             self.process()
 
         elif option == "6":
@@ -92,9 +96,10 @@ class HotelControl(Control):
         if not room:
             raise Exception("Sorry! Hotel is full")
         else:
-            self.room_controller.check_in(room)
-            self.payment_control.make_payment()
-            return room.room_number
+            self.room_control.check_in(room)
+            status = self.payment_control.make_payment()
+            if status != None:
+                return room.room_number
 
     def assign_room(self):
         """
@@ -106,16 +111,6 @@ class HotelControl(Control):
             return room_number
         except Exception as exp:
             return str(exp)
-
-    '''def assign_room(self):
-        available_rooms = self._get_first_nearest_available_room()
-        if not available_rooms:
-            return "Error! - No room is available"
-        else:
-            # !!!! Write Logic to find nearest entrance room
-            room = available_rooms[0]
-            room.check_in()
-            return room.room_number'''
 
     def _find_room(self, room_number):
         rooms = self.get_all_rooms()
@@ -141,12 +136,12 @@ class HotelControl(Control):
         """
         try:
             room = self._validate_room(room_number)
-            self.room_controller.check_out(room)
-            print(room.room_number, "is", room.status.name)
+            self.room_control.check_out(room)
+            return f"{room.room_number} is {room.status.name}"
         except ValueError as err:
-            print(err)
+            return str(err)
         except Exception as exp:
-            print(exp)
+            return str(exp)
 
     def clean_room(self, room_number):
         """
@@ -156,12 +151,12 @@ class HotelControl(Control):
         """
         try:
             room = self._validate_room(room_number)
-            self.room_controller.cleaned(room)
-            print(room.room_number, "is", room.status.name)
+            self.room_control.cleaned(room)
+            return f"{room.room_number} is {room.status.name}"
         except ValueError as err:
-            print(err)
+            return str(err)
         except Exception as exp:
-            print(exp)
+            return str(exp)
 
     def mark_room_out_of_service(self, room_number):
         """
@@ -171,12 +166,12 @@ class HotelControl(Control):
         """
         try:
             room = self._validate_room(room_number)
-            self.room_controller.out_of_service(room)
-            print(room.room_number, "is", room.status.name)
+            self.room_control.out_of_service(room)
+            return f"{room.room_number} is {room.status.name}"
         except ValueError as err:
-            print(err)
+            return str(err)
         except Exception as exp:
-            print(exp)
+            return str(exp)
 
     def repair_room(self, room_number):
         """
@@ -186,12 +181,12 @@ class HotelControl(Control):
         """
         try:
             room = self._validate_room(room_number)
-            self.room_controller.repaired(room)
-            print(room.room_number, "is ", room.status.name)
+            self.room_control.repaired(room)
+            return f"{room.room_number} is {room.status.name}"
         except ValueError as err:
-            print(err)
+            return str(err)
         except Exception as exp:
-            print(exp)
+            return str(exp)
 
 
 

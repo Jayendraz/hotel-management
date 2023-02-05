@@ -4,7 +4,6 @@ from src.status import Status
 class Room:
     def __init__(self, room_number, status):
         self.room_number = room_number
-        # status == Status.Available or status == Status.Occupied or status == Status.Vacant
         self.status = status
 
     def get_status(self):
