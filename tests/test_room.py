@@ -1,9 +1,16 @@
 import unittest
 from src import Room
 from src import Status
+from src.controls.room_control import RoomControl
 
 
 class TestRoomFunctions(unittest.TestCase):
+
+    def setUp(self):
+        self.room_control = RoomControl()
+
+    def tearDown(self):
+        self.room_control = None
 
     def test_get_room_status(self):
         # Arrange
@@ -19,7 +26,7 @@ class TestRoomFunctions(unittest.TestCase):
         room = Room("1A", Status.Available)
         expected_status = Status.Occupied
         # Action
-        room._set_status(Status.Occupied)
+        room.set_status(Status.Occupied)
         # Assert
         self.assertEqual(expected_status, room.status)
 
@@ -28,7 +35,7 @@ class TestRoomFunctions(unittest.TestCase):
         room = Room("1A", Status.Available)
         expected_status = Status.Occupied
         # Action
-        room.check_in()
+        self.room_control.check_in(room)
         # Assert
         self.assertEqual(expected_status, room.status)
 
@@ -37,7 +44,7 @@ class TestRoomFunctions(unittest.TestCase):
         room = Room("1A", Status.Occupied)
         expected_status = Status.Vacant
         # Action
-        room.check_out()
+        self.room_control.check_out(room)
         # Assert
         self.assertEqual(expected_status, room.status)
 
@@ -46,7 +53,7 @@ class TestRoomFunctions(unittest.TestCase):
         room = Room("1A", Status.Vacant)
         expected_status = Status.Available
         # Action
-        room.cleaned()
+        self.room_control.cleaned(room)
         # Assert
         self.assertEqual(expected_status, room.status)
 
@@ -55,7 +62,7 @@ class TestRoomFunctions(unittest.TestCase):
         room = Room("1A", Status.Vacant)
         expected_status = Status.Repair
         # Action
-        room.out_of_service()
+        self.room_control.out_of_service(room)
         # Assert
         self.assertEqual(expected_status, room.status)
 
@@ -64,7 +71,7 @@ class TestRoomFunctions(unittest.TestCase):
         room = Room("1A", Status.Repair)
         expected_status = Status.Vacant
         # Action
-        room.repaired()
+        self.room_control.repaired(room)
         # Assert
         self.assertEqual(expected_status, room.status)
 
@@ -108,50 +115,50 @@ class TestRoomFunctions(unittest.TestCase):
         # Arrange
         room = Room("1A", Status.Available)
         # Action & Assert
-        self.assertRaises(Exception, lambda: room.check_out())
+        self.assertRaises(Exception, lambda: self.room_control.check_out(room))
 
     def test_room_with_status_vacant_can_not_be_occupied(self):
         # Arrange
         room = Room("1A", Status.Vacant)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_out())
+        self.assertRaises(Exception, lambda: self.room_control.check_out(room))
 
     def test_room_with_status_repair_can_not_be_checked_in(self):
         # Arrange
         room = Room("1A", Status.Repair)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_in())
+        self.assertRaises(Exception, lambda: self.room_control.check_in(room))
 
     def test_rooms_with_status_occupied_can_not_be_checked_in(self):
         # Arrange
         room = Room("1A", Status.Occupied)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_in())
+        self.assertRaises(Exception, lambda: self.room_control.check_in(room))
 
     def test_rooms_with_status_occupied_can_not_be_repaired(self):
         # Arrange
         room = Room("1A", Status.Occupied)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.repaired())
+        self.assertRaises(Exception, lambda: self.room_control.repaired(room))
 
     def test_rooms_with_status_occupied_can_not_be_marked_as_out_of_service(self):
         # Arrange
         room = Room("1A", Status.Occupied)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.out_of_service())
+        self.assertRaises(Exception, lambda: self.room_control.out_of_service(room))
 
     def test_rooms_with_status_occupied_can_not_be_cleaned(self):
         # Arrange
         room = Room("1A", Status.Occupied)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.cleaned())
+        self.assertRaises(Exception, lambda: self.room_control.cleaned(room))
 
     def test_rooms_with_status_occupied_can_be_checked_out(self):
         # Arrange
         room = Room("1A", Status.Occupied)
         expected_status = Status.Vacant
         # Action
-        room.check_out()
+        self.room_control.check_out(room)
         # Assert
         self.assertEqual(expected_status, room.status)
 
@@ -159,26 +166,26 @@ class TestRoomFunctions(unittest.TestCase):
         # Arrange
         room = Room("1A", Status.Repair)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.cleaned())
+        self.assertRaises(Exception, lambda: self.room_control.cleaned(room))
 
     def test_rooms_with_status_repair_can_not_be_checkin(self):
         # Arrange
         room = Room("1A", Status.Repair)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_in())
+        self.assertRaises(Exception, lambda: self.room_control.check_in(room))
 
     def test_rooms_with_status_repair_can_not_be_checkout(self):
         # Arrange
         room = Room("1A", Status.Repair)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_out())
+        self.assertRaises(Exception, lambda: self.room_control.check_out(room))
 
     def test_rooms_with_status_repair_can_be_repaired(self):
         # Arrange
         room = Room("1A", Status.Repair)
         expected_response = Status.Vacant
         # Action
-        room.repaired()
+        self.room_control.repaired(room)
         # Assert
         self.assertEqual(expected_response, room.status)
 
@@ -186,26 +193,26 @@ class TestRoomFunctions(unittest.TestCase):
         # Arrange
         room = Room("1A", Status.Available)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.cleaned())
+        self.assertRaises(Exception, lambda: self.room_control.cleaned(room))
 
     def test_rooms_with_status_available_can_not_be_checkout(self):
         # Arrange
         room = Room("1A", Status.Available)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_out())
+        self.assertRaises(Exception, lambda: self.room_control.check_out(room))
 
     def test_rooms_with_status_available_can_not_be_marked_as_out_of_service(self):
         # Arrange
         room = Room("1A", Status.Available)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.out_of_service())
+        self.assertRaises(Exception, lambda: self.room_control.out_of_service(room))
 
     def test_rooms_with_status_available_can_be_checkin(self):
         # Arrange
         room = Room("1A", Status.Available)
         expected_response = Status.Occupied
         # Action
-        room.check_in()
+        self.room_control.check_in(room)
         # Assert
         self.assertEqual(expected_response, room.status)
 
@@ -213,37 +220,43 @@ class TestRoomFunctions(unittest.TestCase):
         # Arrange
         room = Room("1A", Status.Available)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.repaired())
+        self.assertRaises(Exception, lambda: self.room_control.repaired(room))
 
     def test_rooms_with_status_vacant_can_not_be_checkin(self):
         # Arrange
         room = Room("1A", Status.Vacant)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_in())
+        self.assertRaises(Exception, lambda: self.room_control.check_in(room))
 
     def test_rooms_with_status_vacant_can_not_be_checkout(self):
         # Arrange
         room = Room("1A", Status.Vacant)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.check_out())
+        self.assertRaises(Exception, lambda: self.room_control.check_out(room))
 
     def test_rooms_with_status_vacant_can_not_be_repaired(self):
         # Arrange
         room = Room("1A", Status.Vacant)
         # Action & # Assert
-        self.assertRaises(Exception, lambda: room.repaired())
+        self.assertRaises(Exception, lambda: self.room_control.repaired(room))
 
     def test_rooms_with_status_vacant_can_be_cleaned(self):
         # Arrange
         room = Room("1A", Status.Vacant)
-        # Action & # Assert
-        self.assertRaises(Exception, lambda: room.cleaned())
+        expected_response = Status.Available
+        # Action
+        self.room_control.cleaned(room)
+        # Assert
+        self.assertEqual(expected_response, room.status)
 
     def test_rooms_with_status_vacant_can_be_marked_as_out_of_service(self):
         # Arrange
         room = Room("1A", Status.Vacant)
-        # Action & # Assert
-        self.assertRaises(Exception, lambda: room.out_of_service())
+        expected_response = Status.Repair
+        # Action
+        self.room_control.out_of_service(room)
+        # Assert
+        self.assertEqual(expected_response, room.status)
 
 
 
